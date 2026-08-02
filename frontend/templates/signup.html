@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign Up | Vulnerable Web App</title>
+  <link rel="stylesheet" href="/static/css/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-title">
+      <h1>Vulnerable Web App</h1>
+    </div>
+    <div class="header-logos">
+      <img src="/static/images/PUCIT_Logo.png" alt="PUCIT" />
+      <img src="/static/images/blue-logo-scl2.png" alt="FCCU" />
+      <img src="/static/images/excaliat-logo.png" alt="Excaliat" />
+    </div>
+  </header>
+
+  <main class="auth-layout">
+    <section class="auth-panel auth-decor">
+      <div class="circle circle-one"></div>
+      <div class="circle circle-two"></div>
+      <div class="auth-decor-content">
+        <span class="badge">Security Lab</span>
+        <h2>Join the Security Lab</h2>
+        <p>
+          Create a throwaway account to begin your training. Never use real
+          credentials in this application.
+        </p>
+        <ul>
+          <li>Explore the protected dashboard</li>
+          <li>Discover 8 intentional vulnerabilities</li>
+          <li>Learn exploitation and defense</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="auth-panel auth-form-panel">
+      <div class="auth-form-wrap">
+        <h2 class="form-title">Create Account</h2>
+        <p class="form-subtitle">Register for the security lab.</p>
+        <form id="signup-form" action="/signup" method="POST" autocomplete="off">
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" required />
+
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required />
+
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" required />
+
+          <label for="confirm_password">Confirm Password</label>
+          <input type="password" id="confirm_password" name="confirm_password" required />
+          <span id="password-error" class="password-error" style="display: none">
+            Passwords do not match
+          </span>
+
+          <button type="submit" class="btn btn-primary btn-block">Create Account</button>
+        </form>
+        <p class="auth-alt">
+          Already have an account? <a href="/login">Log in</a>
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    document.getElementById("signup-form").addEventListener("submit", (e) => {
+      const p1 = document.getElementById("password").value;
+      const p2 = document.getElementById("confirm_password").value;
+      const error = document.getElementById("password-error");
+
+      if (p1 !== p2) {
+        e.preventDefault();
+        error.style.display = "block";
+      } else {
+        error.style.display = "none";
+      }
+    });
+  </script>
+</body>
+</html>

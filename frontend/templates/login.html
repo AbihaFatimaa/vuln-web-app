@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login | Vulnerable Web App</title>
+  <link rel="stylesheet" href="/static/css/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-title">
+      <h1>Vulnerable Web App</h1>
+    </div>
+    <div class="header-logos">
+      <img src="/static/images/PUCIT_Logo.png" alt="PUCIT" />
+      <img src="/static/images/blue-logo-scl2.png" alt="FCCU" />
+      <img src="/static/images/excaliat-logo.png" alt="Excaliat" />
+    </div>
+  </header>
+
+  <main class="auth-layout">
+    <section class="auth-panel auth-decor">
+      <div class="circle circle-one"></div>
+      <div class="circle circle-two"></div>
+      <div class="auth-decor-content">
+        <span class="badge">Security Lab</span>
+        <h2>Welcome to the Security Lab</h2>
+        <p>
+          Hands-on OWASP Top 10 training. This intentionally insecure
+          application lets you find, exploit, and fix real web vulnerabilities
+          in a safe environment.
+        </p>
+        <ul>
+          <li>SQL Injection</li>
+          <li>Stored &amp; Reflected XSS</li>
+          <li>Session Hijacking</li>
+          <li>Weak Password Storage</li>
+          <li>Exposed Database</li>
+          <li>No Rate Limiting</li>
+          <li>CSRF</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="auth-panel auth-form-panel">
+      <div class="auth-form-wrap">
+        <h2 class="form-title">Sign In</h2>
+        <p class="form-subtitle">Access your security lab dashboard.</p>
+        <div id="error-box" class="error-box" style="display: none"></div>
+        <form id="login-form" autocomplete="off">
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" required />
+
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" required />
+
+          <button type="submit" class="btn btn-primary btn-block">Login</button>
+        </form>
+        <p class="auth-alt">
+          Don't have an account? <a href="/signup">Sign up</a>
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    document.getElementById("login-form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const form = e.target;
+      const errorBox = document.getElementById("error-box");
+      errorBox.style.display = "none";
+
+      const body = new URLSearchParams(new FormData(form));
+      const res = await fetch("/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body,
+      });
+
+      const data = await res.json().catch(() => ({}));
+      if (data.success) {
+        window.location.href = data.redirect;
+      } else {
+        errorBox.textContent = data.error || "Login failed";
+        errorBox.style.display = "block";
+      }
+    });
+  </script>
+</body>
+</html>

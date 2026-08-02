@@ -1,0 +1,10 @@
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Runtime database (created automatically on first run)
+vulnerable_app.db
+
+# Virtual environments
+.venv/
+venv/

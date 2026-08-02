@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard | Vulnerable Web App</title>
+  <link rel="stylesheet" href="/static/css/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-title">
+      <h1>Vulnerable Web App</h1>
+    </div>
+    <div class="header-logos">
+      <img src="/static/images/PUCIT_Logo.png" alt="PUCIT" />
+      <img src="/static/images/blue-logo-scl2.png" alt="FCCU" />
+      <img src="/static/images/excaliat-logo.png" alt="Excaliat" />
+    </div>
+  </header>
+
+  <section class="hero-banner">
+    <div class="hero-left">
+      <h1>Security Vulnerability Lab</h1>
+      <p>Hands-on OWASP Top 10 web security training</p>
+    </div>
+    <div class="hero-right">
+      <!-- VULN-2 (Stored XSS): {{username}} is replaced server-side without
+           any HTML escaping, so a malicious username stored in the database
+           executes script when this dashboard is rendered. -->
+      <p>Logged in as <strong>{{username}}</strong></p>
+      <a href="/logout" class="btn btn-logout">Logout</a>
+    </div>
+  </section>
+
+  <main class="dashboard">
+    <section class="card mission-card">
+      <h2 class="section-title">Mission</h2>
+      <p class="section-desc">
+        Find and exploit all 8 intentionally embedded security flaws. Review
+        the source code, follow <code>docs/EXPLOITS.md</code>, and learn how
+        each vulnerability works before implementing the fix.
+      </p>
+    </section>
+
+    <section class="vuln-section">
+      <h2 class="section-heading">Vulnerabilities to Discover</h2>
+      <div class="vuln-grid">
+        <div class="vuln-card">
+          <span class="tag tag-sqli">SQLi</span>
+          <h3 class="card-title">SQL Injection</h3>
+          <p>Authentication bypass via crafted payloads in the username field.</p>
+        </div>
+        <div class="vuln-card">
+          <span class="tag tag-xss">XSS</span>
+          <h3 class="card-title">Stored XSS</h3>
+          <p>Malicious username persists in the database and fires on render.</p>
+        </div>
+        <div class="vuln-card">
+          <span class="tag tag-xss">XSS</span>
+          <h3 class="card-title">Reflected XSS</h3>
+          <p>Search query reflected unescaped in the response.</p>
+        </div>
+        <div class="vuln-card">
+          <span class="tag tag-session">Session</span>
+          <h3 class="card-title">Session Hijacking</h3>
+          <p>Hardcoded weak secret lets anyone forge session cookies.</p>
+        </div>
+        <div class="vuln-card">
+          <span class="tag tag-crypto">Crypto</span>
+          <h3 class="card-title">Weak Password Storage</h3>
+          <p>Unsalted MD5 hashes are trivial to reverse.</p>
+        </div>
+        <div class="vuln-card">
+          <span class="tag tag-exposed">Exposed</span>
+          <h3 class="card-title">Exposed Database</h3>
+          <p>Anyone can download the raw SQLite file.</p>
+        </div>
+        <div class="vuln-card">
+          <span class="tag tag-brute">Brute</span>
+          <h3 class="card-title">No Rate Limiting</h3>
+          <p>Unlimited attempts allow brute-force credential guessing.</p>
+        </div>
+        <div class="vuln-card">
+          <span class="tag tag-csrf">CSRF</span>
+          <h3 class="card-title">CSRF</h3>
+          <p>No token validation on any state-changing request.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="process-section">
+      <h2 class="section-heading">Your Process</h2>
+      <div class="process-steps">
+        <div class="step-card">
+          <span class="step-badge">1</span>
+          <h3 class="card-title">Find</h3>
+          <p>Locate each vulnerability in the source code.</p>
+        </div>
+        <div class="step-card">
+          <span class="step-badge">2</span>
+          <h3 class="card-title">Exploit</h3>
+          <p>Trigger it with a crafted request.</p>
+        </div>
+        <div class="step-card">
+          <span class="step-badge">3</span>
+          <h3 class="card-title">Mitigate</h3>
+          <p>Apply the secure coding fix.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Vulnerable Web App &mdash; Security Education Platform. Authorized access only.</p>
+  </footer>
+</body>
+</html>
